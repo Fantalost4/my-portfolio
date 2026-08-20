@@ -282,11 +282,11 @@ window.addEventListener('DOMContentLoaded', () => {
   postScene.add(new THREE.Mesh(quadGeometry, finalMaterial));
 
   const mouse = { targetX: 0, targetY: 0, uvX: 0.5, uvY: 0.5, velocityX: 0, velocityY: 0, lastX: 0.5, lastY: 0.5, distortionStrength: 0.12, distortionTarget: 0.12 };
-  window.addEventListener('mousemove', (event) => {
-    const nextX = event.clientX / window.innerWidth - 0.5;
-    const nextY = 0.5 - event.clientY / window.innerHeight;
-    const nextUvX = event.clientX / window.innerWidth;
-    const nextUvY = 1 - event.clientY / window.innerHeight;
+  function updateInputPosition(clientX, clientY) {
+    const nextX = clientX / window.innerWidth - 0.5;
+    const nextY = 0.5 - clientY / window.innerHeight;
+    const nextUvX = clientX / window.innerWidth;
+    const nextUvY = 1 - clientY / window.innerHeight;
     mouse.targetX = nextX;
     mouse.targetY = nextY;
     mouse.uvX = nextUvX;
@@ -296,7 +296,11 @@ window.addEventListener('DOMContentLoaded', () => {
     mouse.lastX = nextUvX;
     mouse.lastY = nextUvY;
     mouse.distortionTarget = Math.min(0.48, 0.12 + Math.hypot(mouse.velocityX, mouse.velocityY) * 9.0);
-  });
+  }
+  window.addEventListener('mousemove', (event) => updateInputPosition(event.clientX, event.clientY), { passive: true });
+  window.addEventListener('pointermove', (event) => {
+    if (event.pointerType === 'touch') updateInputPosition(event.clientX, event.clientY);
+  }, { passive: true });
 
   gsap.registerPlugin(ScrollTrigger);
   const lenis = new Lenis({ duration: 1.2, smoothWheel: true, smoothTouch: false });
