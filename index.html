@@ -10,10 +10,10 @@
     :root{--black:#f8e6ed;--white:#55243f;--acid:#c76891;--red:#a94470;--line:rgba(85,36,63,.22)}
     html,body{background:#f8e6ed;color:#55243f}
     .webgl{opacity:1}
-    .ui-container{opacity:0;visibility:hidden}
+    .ui-container{opacity:1;visibility:visible}
     .ui-container.intro-ready{visibility:visible}
     .ui-container.intro-ready .logo,.ui-container.intro-ready .header-meta,.ui-container.intro-ready .side-label,.ui-container.intro-ready .hero-copy,.ui-container.intro-ready .progress{visibility:hidden}
-    .hero-copy,.header-meta,.side-label,.progress,.logo{display:none!important}
+    .hero-copy,.side-label,.progress{display:none!important}.logo,.header-meta{display:flex!important}.webgl-fallback-title{position:fixed;left:50%;top:50%;z-index:4;transform:translate(-50%,-50%);color:#d5d5d5;font:600 clamp(72px,14vw,190px) Manrope,Arial,sans-serif;letter-spacing:-.08em;pointer-events:none;transition:opacity .5s ease}.webgl-fallback-title.is-hidden{opacity:0}
     .pointer-dot{position:fixed;left:0;top:0;width:10px;height:10px;border-radius:50%;background:#8d3d67;border:1px solid rgba(255,247,251,.72);box-shadow:0 0 0 3px rgba(141,61,103,.16),0 2px 12px rgba(85,36,63,.28);pointer-events:none;z-index:50;transform:translate(-50%,-50%);opacity:0;transition:opacity .25s ease}
     .pointer-dot.visible{opacity:1}
     .section-two{pointer-events:auto}.start-btn{min-width:132px;padding:16px 30px;border:1px solid #55243f;border-radius:999px;background:#55243f;color:#fff0f5;font:500 11px "DM Mono",monospace;letter-spacing:.16em;cursor:pointer;transition:background .35s ease,color .35s ease,transform .35s ease,box-shadow .35s ease}.start-btn:hover{background:transparent;color:#55243f;transform:scale(1.08);box-shadow:0 0 0 9px rgba(85,36,63,.12)}.start-btn:disabled{pointer-events:none}.section-three .start-btn{position:absolute;left:50%;top:10%;bottom:auto;z-index:20;transform:translateX(-50%)}.section-three .start-btn:hover{transform:translateX(-50%) scale(1.08)}.start-caption{position:absolute;left:50%;top:calc(10% + 76px);transform:translateX(-50%);z-index:20;color:rgba(85,36,63,.72);font:500 18px Manrope,Arial,sans-serif;letter-spacing:.08em;white-space:nowrap;animation:startCaptionFloat 3.6s ease-in-out infinite alternate}@keyframes startCaptionFloat{0%{transform:translate(-50%,0)}100%{transform:translate(-50%,5px)}}
@@ -58,6 +58,7 @@
 </head>
 <body>
   <canvas class="webgl"></canvas>
+  <div class="webgl-fallback-title">NEXUS</div>
   <div class="ui-container">
     <header class="site-header">
       <a class="logo" href="#top" aria-label="NEXUS, наверх">NEXUS</a>
@@ -83,6 +84,6 @@
       <div class="tunnel-container" aria-hidden="true"></div>
     <section class="scroll-section section-three" id="contact" aria-label="Контакты"><button class="start-btn" type="button">START</button><span class="start-caption">@lost.spriteee</span><div class="section-number">03</div></section>
   </main>
-  <script type="module" src="script.js"></script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
